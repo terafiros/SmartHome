@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Smart Home</string>
+    <string name="no_devices">No devices conected</string>
+    <string name="device_state">state of the device</string>
+    <string name="text_on">on</string>
+    <string name="text_off">off</string>
+    <string name="add_device_name">Device Name</string>
+    <string name="add_serial_number">Serial Number</string>
+    <string name="cancel">Cancel</string>
+</resources>
