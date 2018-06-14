@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         Device device = getIntent().getParcelableExtra("device");
         if (device != null)
             list.add(device);
+
         list.add(new Device("000000000001", "primeiro"));
         list.add(new Device("000000000002", "segundo", true));
+
         return list;
     }
 

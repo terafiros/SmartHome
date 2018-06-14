@@ -1,17 +1,21 @@
 package com.terafiros.smarthome;
 
 import android.app.Activity;
-import android.content.Context;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -48,15 +52,50 @@ public class DevicesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = activity.getLayoutInflater().inflate(R.layout.devices_adapter_layout, parent, false);
-        Device device = deviceList.get(position);
+        final Device device = deviceList.get(position);
         ImageView image = (ImageView) view.findViewById(R.id.image_view);
         TextView deviceName = (TextView) view.findViewById(R.id.device_name);
         Switch deviceState = (Switch) view.findViewById(R.id.device_state);
 
+
+
         deviceName.setText(device.getName());
         deviceState.setChecked(device.isState());
-
+        deviceState.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    String adress = "http://192.168.75.3:12345/insert/" + device.getName();
+                    new QueryTask().execute(adress);
+                }else{
+                    String adress = "http://192.168.75.3:12345/insert/" + device.getName();
+                    new QueryTask().execute(adress);
+                }
+            }
+        });
         return view;
 
+    }
+
+    private class QueryTask extends AsyncTask<String, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(String... adress) {
+            try {
+                URL url = new URL(adress[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+                connection.getResponseCode();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
     }
 }
