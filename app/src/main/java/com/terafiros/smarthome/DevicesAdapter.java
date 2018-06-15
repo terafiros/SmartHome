@@ -65,10 +65,11 @@ public class DevicesAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    String adress = "http://192.168.75.3:12345/insert/" + device.getName();
+
+                    String adress = "http://192.168.0.11:8080/insert/ON";
                     new QueryTask().execute(adress);
                 }else{
-                    String adress = "http://192.168.75.3:12345/insert/" + device.getName();
+                    String adress = "http://192.168.0.11:8080/insert/OFF";
                     new QueryTask().execute(adress);
                 }
             }
