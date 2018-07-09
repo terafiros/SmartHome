@@ -43,8 +43,12 @@ public class MainActivity extends AppCompatActivity {
         if (device != null)
             list.add(device);
 
-        list.add(new Device("000000000001", "primeiro"));
-        list.add(new Device("000000000002", "segundo", true));
+        list.add(new Device("1", "primeiro"));
+        list.add(new Device("2", "segundo"));
+        list.add(new Device("3", "terceiro"));
+        list.add(new Device("4", "quarto"));
+        list.add(new Device("5", "quinto"));
+        list.add(new Device("6", "sexto"));
 
         return list;
     }
